@@ -2,26 +2,6 @@ Create database jpatil
 use jpatil
 
 
-*********
-CREATE TABLE Employee (   
-    emp_no INT PRIMARY KEY,
-    emp_name VARCHAR(50),
-    emp_address VARCHAR(100),
-    salary DECIMAL(10, 2),
-    dept_id INT
-);
-
-***********
-INSERT INTO Employee (emp_no, emp_name, emp_address, salary, dept_id) VALUES
-(101, 'John Doe', '123 Elm Street', 55000.00, 1),
-(102, 'Jane Smith', '456 Oak Avenue', 62000.00, 2),
-(103, 'Mike Johnson', '789 Pine Road', 48000.00, 1),
-(104, 'Emily Davis', '321 Birch Lane', 70000.00, 3),
-(105, 'Sarah Brown', '654 Cedar Court', 53000.00, 2);
-
-
-SELECT * FROM Employee;
-
 
 
 -- Step 1: Create the Student table
@@ -45,9 +25,9 @@ INSERT INTO Student (Roll_no, s_name, Class, address, department) VALUES
 SELECT * FROM Student;
 
 
+##########################################################################################
+Aggregate Functions
 
-
-Perform the Aggregate functions.************$$
 -- 1. Count the total number of students
 SELECT COUNT(*) AS Total_Students FROM Student;
 
@@ -70,7 +50,7 @@ SELECT department, MAX(Roll_no) AS Max_Roll_no, MIN(Roll_no) AS Min_Roll_no
 FROM Student
 GROUP BY department;
 
-
+##########################################################################################
 
 Perform the String functions.***************
 SELECT s_name, UPPER(s_name) AS Uppercase_Name FROM Student;
@@ -80,7 +60,7 @@ SELECT s_name, Class, CONCAT(s_name, ' - ', Class) AS Name_Class_Concat FROM Stu
 SELECT s_name, SUBSTRING(s_name, 1, 5) AS Name_Substring FROM Student;
 SELECT s_name, REPLACE(s_name, 'Alice', 'Alicia') AS Name_Replaced FROM Student;
 SELECT s_name, TRIM(s_name) AS Trimmed_Name FROM Student;
-
+##########################################################################################
 
 
 
@@ -95,7 +75,7 @@ SELECT Roll_no, ROUND(Roll_no / 3.0, 2) AS Rounded_Value FROM Student;
 SELECT Roll_no, SQRT(Roll_no) AS Square_Root FROM Student;
 SELECT Roll_no, ABS(Roll_no - 3) AS Absolute_Value FROM Student;
 
-
+##########################################################################################
 
 *Perform the Date functions*.**********
 ALTER TABLE Student ADD admission_date DATE;
