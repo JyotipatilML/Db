@@ -1,139 +1,254 @@
-Create database jpatil
-use jpatil
+OW
+
+DS
+
+
+
+from collections import deque
+
+# Define the graph as an adjacency list
+graph = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [0, 5],
+    3: [1],
+    4: [],
+    5: [2]
+}
+
+# BFS Implementation
+def bfs(start, visited):
+    queue = deque([start])
+    visited.add(start)
+
+    while queue:
+        node = queue.popleft()
+        print(node, end=" ")
+
+        for nei in graph[node]:
+            if nei not in visited:
+                visited.add(nei)
+                queue.append(nei)
+
+# DFS Implementation
+def dfs(start, visited):
+    print(start, end=" ")
+    visited.add(start)
+
+    for nei in graph[start]:
+        if nei not in visited:
+            dfs(nei, visited)
+
+# Main code
+print("BFS traversal of graph:")
+visited = set()
+for node in graph:
+    if node not in visited:
+        bfs(node, visited)
+
+print("\nDFS traversal of graph:")
+visited = set()
+for node in graph:
+    if node not in visited:
+        dfs(node, visited)
 
 
 
 
--- Step 1: Create the Student table
-CREATE TABLE Student (
-    Roll_no INT PRIMARY KEY,
-    s_name VARCHAR(50),
-    Class VARCHAR(20),
-    address VARCHAR(100),
-    department VARCHAR(50)
-);
 
--- Step 2: Insert 5 records into the Student table
-INSERT INTO Student (Roll_no, s_name, Class, address, department) VALUES
-(1, 'Alice Green', '10A', '123 Maple Street', 'Science'),
-(2, 'Bob White', '10B', '456 Elm Avenue', 'Mathematics'),
-(3, 'Charlie Black', '9A', '789 Oak Lane', 'Arts'),
-(4, 'Diana Brown', '10C', '321 Pine Court', 'Commerce'),
-(5, 'Eve Smith', '9B', '654 Cedar Road', 'Science');
+##########################################
+The Fibonacci sequence is the series of numbers 0, 1, 1, 2, 3, 5 8. Write a program that generates the Fibonacci sequence using C.
 
-- Step 3: Display the table
-SELECT * FROM Student;
+#include <stdio.h>
+#include <conio.h>
 
+int main() {
+    int i, n, t1 = 0, t2 = 1, next;
 
-##########################################################################################
-Aggregate Functions
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
 
--- 1. Count the total number of students
-SELECT COUNT(*) AS Total_Students FROM Student;
+    printf("Fibonacci Series: ");
 
--- 2. Find the maximum Roll_no
-SELECT MAX(Roll_no) AS Max_Roll_no FROM Student;
+    for (i = 1; i <= n; ++i) {
+        printf("%d ", t1);
+        next = t1 + t2;
+        t1 = t2;
+        t2 = next;
+    }
 
--- 3. Find the minimum Roll_no
-SELECT MIN(Roll_no) AS Min_Roll_no FROM Student;
+    getch();
+    return 0;
+}
+################################
 
--- 4. Find the average Roll_no
-SELECT AVG(Roll_no) AS Average_Roll_no FROM Student;
-
--- 5. Count students in each department
-SELECT department, COUNT(*) AS Students_Per_Department
-FROM Student
-GROUP BY department;
-
--- 6. Find the maximum and minimum Roll_no grouped by department
-SELECT department, MAX(Roll_no) AS Max_Roll_no, MIN(Roll_no) AS Min_Roll_no
-FROM Student
-GROUP BY department;
-
-##########################################################################################
-
-Perform the String functions.***************
-SELECT s_name, UPPER(s_name) AS Uppercase_Name FROM Student;
-SELECT s_name, LOWER(s_name) AS Lowercase_Name FROM Student;
-SELECT s_name, LENGTH(s_name) AS Name_Length FROM Student;
-SELECT s_name, Class, CONCAT(s_name, ' - ', Class) AS Name_Class_Concat FROM Student;
-SELECT s_name, SUBSTRING(s_name, 1, 5) AS Name_Substring FROM Student;
-SELECT s_name, REPLACE(s_name, 'Alice', 'Alicia') AS Name_Replaced FROM Student;
-SELECT s_name, TRIM(s_name) AS Trimmed_Name FROM Student;
-##########################################################################################
+AIM Write a C program that outputs prime numbers. This program should work as follows: The user will run the program and will enter a number on the command line. The program will then create a separate thread that outputs all the prime numbers less than or equal to the number entered by the user
 
 
 
-Perform the Math functions.***************
-SELECT Roll_no, Roll_no + 10 AS Added_Value FROM Student;
-SELECT Roll_no, Roll_no - 5 AS Subtracted_Value FROM Student;
-SELECT Roll_no, Roll_no * 2 AS Multiplied_Value FROM Student;
-SELECT Roll_no, POWER(Roll_no, 2) AS Powered_Value FROM Student;
-SELECT Roll_no, Roll_no / 2 AS Divided_Value FROM Student;
-SELECT Roll_no, MOD(Roll_no, 2) AS Modulus_Value FROM Student;
-SELECT Roll_no, ROUND(Roll_no / 3.0, 2) AS Rounded_Value FROM Student;
-SELECT Roll_no, SQRT(Roll_no) AS Square_Root FROM Student;
-SELECT Roll_no, ABS(Roll_no - 3) AS Absolute_Value FROM Student;
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
 
-##########################################################################################
+int main() {
+    int n, i, j, isPrime;
 
-*Perform the Date functions*.**********
-ALTER TABLE Student ADD admission_date DATE;
+    printf("Enter a number: ");
+    scanf("%d", &n);
 
--- Insert some sample dates for demonstration
-UPDATE Student SET admission_date = 
-    CASE 
-        WHEN Roll_no = 1 THEN '2023-01-15'
-        WHEN Roll_no = 2 THEN '2023-02-10'
-        WHEN Roll_no = 3 THEN '2023-03-05'
-        WHEN Roll_no = 4 THEN '2023-04-20'
-        WHEN Roll_no = 5 THEN '2023-05-15'
-    END;
+    printf("Prime numbers up to %d are: ", n);
 
--- View the updated table
-SELECT * FROM Student;
+    for (i = 2; i <= n; i++) {
+        isPrime = 1;
+        for (j = 2; j <= sqrt(i); j++) {
+            if (i % j == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+        if (isPrime)
+            printf("%d ", i);
+    }
 
-SELECT 
-    Roll_no, 
-    admission_date, 
-    YEAR(admission_date) AS Admission_Year, 
-    MONTH(admission_date) AS Admission_Month, 
-    DAY(admission_date) AS Admission_Day 
-FROM Student;
+    getch();
+    return 0;
+}
+############################################
+AIM: Write a C program that implements the FIFO page-replacement algorithm
+
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    float avg_wait = 0, avg_turnaround = 0;
+
+    printf("Enter the number of processes: ");
+    scanf("%d", &n);
+
+    int burst_time[n], waiting_time[n], turnaround_time[n];
+
+    // Input burst times
+    printf("Enter the burst time for each process:\n");
+    for (i = 0; i < n; i++) {
+        printf("P%d: ", i + 1);
+        scanf("%d", &burst_time[i]);
+    }
+
+    // Waiting time for first process is 0
+    waiting_time[0] = 0;
+
+    // Calculate waiting time for each process
+    for (i = 1; i < n; i++) {
+        waiting_time[i] = waiting_time[i - 1] + burst_time[i - 1];
+    }
+
+    // Calculate turnaround time
+    for (i = 0; i < n; i++) {
+        turnaround_time[i] = burst_time[i] + waiting_time[i];
+    }
+
+    // Display results
+    printf("\nProcess\tBurst Time\tWaiting Time\tTurnaround Time\n");
+    for (i = 0; i < n; i++) {
+        printf("P%d\t%d\t\t%d\t\t%d\n", i + 1, burst_time[i], waiting_time[i], turnaround_time[i]);
+        avg_wait += waiting_time[i];
+        avg_turnaround += turnaround_time[i];
+    }
+
+    printf("\nAverage Waiting Time: %.2f", avg_wait / n);
+    printf("\nAverage Turnaround Time: %.2f\n", avg_turnaround / n);
+
+    return 0;
+}
+
+#################################################
+Practical No. 5: Design File System in 
+
+AIM: Create a text file name as a test.txt
 
 
-SELECT 
-    Roll_no, 
-    admission_date, 
-    DATE_ADD(admission_date, INTERVAL 30 DAY) AS Admission_Date_Plus_30_Days 
-FROM Student;
+#include <stdio.h>
+#include <conio.h>
+
+int main() {
+    FILE *fp;  // File pointer
+
+    // Create (or overwrite) a text file named "test.txt"
+    fp = fopen("test.txt", "w");
+
+    // Check if file creation was successful
+    if (fp == NULL) {
+        printf("Error! Unable to create file.\n");
+        return 1;
+    }
+
+    // Write some text into the file
+    fprintf(fp, "This is a sample text written to test.txt file.\n");
+    fprintf(fp, "File created successfully using a C program.\n");
+
+    // Close the file
+    fclose(fp);
+
+    printf("File 'test.txt' created and data written successfully.\n");
+
+    getch(); // Wait for key press before closing (Turbo C compatible)
+    return 0;
+}
 
 
-SELECT 
-    Roll_no, 
-    admission_date, 
-    DATEDIFF(CURDATE(), admission_date) AS Days_Since_Admission 
-FROM Student;
+
+###############################################
+AIM: Store the information in a file created with a given name.
+
+#include <stdio.h>
+#include <conio.h>
+
+struct Person {
+    char name[50];
+    int age;
+    char address[100];
+};
+
+int main() {
+    struct Person p;
+    FILE *fp;
+
+    // Open file in write mode (create if not exists)
+    fp = fopen("test.txt", "w");
+
+    if (fp == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+
+    // Get input from user
+    printf("Enter your name: ");
+    fgets(p.name, sizeof(p.name), stdin);
+
+    printf("Enter your age: ");
+    scanf("%d", &p.age);
+    getchar(); // consume newline character left by scanf
+
+    printf("Enter your address: ");
+    fgets(p.address, sizeof(p.address), stdin);
+
+    // Write data to file
+    fprintf(fp, "Name: %s", p.name);
+    fprintf(fp, "Age: %d\n", p.age);
+    fprintf(fp, "Address: %s", p.address);
+
+    fclose(fp);
+
+    printf("\nInformation stored successfully in 'test.txt'\n");
+
+    getch();
+    return 0;
+}
 
 
-SELECT 
-    Roll_no, 
-    admission_date, 
-    DAYNAME(admission_date) AS Day_Name 
-FROM Student;
 
 
 
-SELECT 
-    Roll_no, 
-    admission_date, 
-    DATE_FORMAT(admission_date, '%d-%m-%Y') AS Formatted_Date 
-FROM Student;
 
-
-
-SELECT 
-    CURDATE() AS Current_Date, 
-    CURTIME() AS Current_Time, 
-    NOW() AS Current_DateTime;
+################
 
